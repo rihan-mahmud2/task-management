@@ -6,7 +6,6 @@ function Tasks() {
   return (
     <div class="lws-task-list">
       <Task />
-      <Assign />
     </div>
   );
 }
