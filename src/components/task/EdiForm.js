@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import {
-  useGetMemberQuery,
-  useGetTeamQuery,
-} from "../../features/getTeam/getTeamApi";
-import {
-  useGetProjectQuery,
-  useGetProjectsQuery,
-} from "../../features/getProjects/getProjectsApi";
+import { useGetTeamQuery } from "../../features/getTeam/getTeamApi";
+import { useGetProjectsQuery } from "../../features/getProjects/getProjectsApi";
 import { useEditTaskMutation } from "../../features/getTasks/getTasksApi";
 import { useNavigate } from "react-router-dom";
 
@@ -29,14 +23,12 @@ function EditForm({ task }) {
   const [to, setTo] = useState(editTo);
   const [projectName, setProjectName] = useState(editProjectName);
   const [deadline, setDeadline] = useState(editDeadline);
-  const { data: teamData } = useGetMemberQuery(to);
-  const { data: projectData } = useGetProjectQuery(projectName);
+  const teamMember = teamMembers?.find((teamMember) => teamMember?.name === to);
+  const project = projects?.find(
+    (project) => project?.projectName === projectName
+  );
   const [name, setName] = useState(editName);
   const navigate = useNavigate();
-  const [teamMember] = teamData || [];
-  const [project] = projectData || [];
-
-  console.log(editDeadline, editTo, editName);
 
   const handleSubmit = (e) => {
     e.preventDefault();

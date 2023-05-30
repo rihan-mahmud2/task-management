@@ -16,6 +16,23 @@ export const getTasks = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
+
+      async onQueryStarted(arg, { dispatch }) {
+        const editTask = dispatch(
+          apiSlice.util.updateQueryData("getTasks", undefined, (draft) => {
+            const editedTask = draft.find((task) => task?.id == arg?.id);
+            editedTask.id = arg?.data?.id;
+            editedTask.taskName = arg?.data?.taskName;
+            editedTask.teamMember = arg?.data?.teamMember;
+            editedTask.project = arg?.data?.project;
+            editedTask.deadline = arg?.data?.deadline;
+          })
+        );
+        try {
+        } catch (e) {
+          editTask.undo();
+        }
+      },
     }),
     editStatus: builder.mutation({
       query: ({ id, data }) => ({

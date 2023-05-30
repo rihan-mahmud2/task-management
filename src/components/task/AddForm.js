@@ -20,11 +20,12 @@ function AddForm() {
   const [to, setTo] = useState("");
   const [projectName, setProjectName] = useState("");
   const [deadline, setDeadline] = useState("");
-  const { data: teamData } = useGetMemberQuery("");
-  const { data: projectData } = useGetProjectQuery("");
+  const teamMember = teamMembers?.find((teamMember) => teamMember?.name === to);
+  const project = projects?.find(
+    (project) => project?.projectName === projectName
+  );
+
   const [name, setName] = useState("");
-  const [teamMember] = teamData || [];
-  const [project] = projectData || [];
 
   const handleSubmit = (e) => {
     e.preventDefault();
