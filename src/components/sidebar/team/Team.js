@@ -1,10 +1,13 @@
 import React from "react";
 
-function Team() {
+function Team({ team }) {
+  const { name, avatar } = team || {};
+
+  console.log(name, avatar);
   return (
-    <div class="checkbox-container">
-      <img src="./images/avatars/sumit.png" class="team-avater" />
-      <p class="label">Sumit Saha</p>
+    <div className="checkbox-container">
+      <img src={avatar} className="team-avater" />
+      <p className="label">{name}</p>
     </div>
   );
 }

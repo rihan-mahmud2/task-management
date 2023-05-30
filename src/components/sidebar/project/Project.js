@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Project() {
+function Project({ projectName, colorClass }) {
+  const [checked, setChecked] = useState(false);
   return (
-    <div class="checkbox-container">
-      <input type="checkbox" class="color-jobFinder" checked />
-      <p class="label">Job Finder</p>
+    <div className="checkbox-container">
+      <input
+        onChange={() => setChecked(!checked)}
+        type="checkbox"
+        className={colorClass}
+        checked={checked}
+      />
+      <p className="label">{projectName}</p>
     </div>
   );
 }

@@ -6,18 +6,20 @@ import Tasks from "../components/task/Tasks";
 
 function Home() {
   return (
-    <div class="container relative">
-      <div class="sidebar">
+    <div className="container relative">
+      <div className="sidebar">
         <Projects />
 
         <Teams />
       </div>
 
-      <div class="lg:pl-[16rem] 2xl:pl-[23rem]">
-        <main class="relative z-20 max-w-3xl mx-auto rounded-lg xl:max-w-none">
+      <div className="lg:pl-[16rem] 2xl:pl-[23rem]">
+        <main className="relative z-20 max-w-3xl mx-auto rounded-lg xl:max-w-none">
           <AddTask />
 
-          <Tasks />
+          <div className="lws-task-list">
+            <Tasks />
+          </div>
         </main>
       </div>
     </div>

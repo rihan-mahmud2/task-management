@@ -1,13 +1,23 @@
 import React from "react";
 import Task from "./Task";
-import Assign from "../assign/Assign";
+
+import { useGetTasksQuery } from "../../features/getTasks/getTasksApi";
 
 function Tasks() {
-  return (
-    <div class="lws-task-list">
-      <Task />
-    </div>
-  );
+  const { data: tasks, isError, isLoading } = useGetTasksQuery();
+  let content = null;
+
+  if (isLoading) {
+    content = <p>Tasks are loading......</p>;
+  } else if (!isLoading && isError) {
+    content = <p>There was an error</p>;
+  } else if (!isLoading && !isError && tasks?.length === 0) {
+    content = <p>There is no content found</p>;
+  } else if (!isLoading && !isError && tasks?.length > 0) {
+    content = tasks.map((task) => <Task key={task.id} task={task} />);
+  }
+
+  return <>{content}</>;
 }
 
 export default Tasks;
